@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.company.app.R
 import com.company.app.commons.data.local.entity.LocationEntity
 import com.company.app.commons.data.local.entity.RequestEntity
@@ -24,7 +25,8 @@ class RequestListFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_list, container, false)
+        binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_request_list, container, false)
         val adapter = RequestListAdapter()
         binding.adapter = adapter
         return binding.root
@@ -41,9 +43,21 @@ class RequestListFragment : BaseFragment() {
 
 
     private fun initialiseView() {
+        binding.btnAddRequest.setOnClickListener {
+            findNavController().navigate(R.id.action_requestListFragment_to_requestCreateFragment)
+        }
         val request = mutableListOf<RequestEntity>()
         for (x in 0..100) {
-            request.add(RequestEntity(id = "$x", name = "name $x", email = "email $x", description = "description $x", phone = "phone $x", location = LocationEntity(name = "location $x")))
+            request.add(
+                    RequestEntity(
+                            id = "$x",
+                            name = "name $x",
+                            email = "email $x",
+                            description = "description $x",
+                            phone = "phone $x",
+                            location = LocationEntity(name = "location $x")
+                    )
+            )
         }
         binding.adapter?.data = request
     }

@@ -2,4 +2,14 @@
 
     <string name="title_error">Error</string>
     <string name="accept">Aceptar</string>
+    <string name="name">Nombre</string>
+    <string name="email">Correo electrónico</string>
+    <string name="phone">Teléfono</string>
+    <string name="location">Localización</string>
+    <string name="request_budget">Solicitar Presupuesto</string>
+    <string name="name_required">El nombre es obligatorio</string>
+    <string name="phone_required">Teléfono es obligatorio</string>
+    <string name="error_format">Debe ser un formato válido</string>
+    <string name="location_required">Se debe seleccionar una localidad</string>
+    <string name="mail_required">El correo electrónico es obligatorio</string>
 </resources>

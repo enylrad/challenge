@@ -3,6 +3,9 @@ package com.company.app.commons.custom
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * @author antoniolg
+ */
 interface AutoUpdatableAdapter {
 
     fun <T> RecyclerView.Adapter<*>.autoNotify(old: List<T>, new: List<T>, compare: (T, T) -> Boolean) {

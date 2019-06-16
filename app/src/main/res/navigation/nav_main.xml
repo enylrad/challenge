@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
     app:startDestination="@id/requestListFragment">
 
     <fragment
         android:id="@+id/requestListFragment"
         android:name="com.company.app.ui.fragment.RequestListFragment"
-        android:label="RequestListFragment" />
+        android:label="RequestListFragment"
+        tools:layout="@layout/fragment_request_list">
+        <action
+            android:id="@+id/action_requestListFragment_to_requestCreateFragment"
+            app:destination="@id/requestCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestCreateFragment"
+        android:name="com.company.app.ui.fragment.RequestCreateFragment"
+        android:label="RequestCreateFragment"
+        tools:layout="@layout/fragment_request_create" />
+
+
 </navigation>

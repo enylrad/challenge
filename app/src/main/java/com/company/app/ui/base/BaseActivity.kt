@@ -1,5 +1,7 @@
 package com.company.app.ui.base
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.company.app.ui.dialog.ErrorDialog
 import dagger.android.support.HasSupportFragmentInjector
@@ -19,4 +21,11 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
+    fun hideSoftKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocus = currentFocus
+        if (currentFocus != null) {
+            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
+    }
 }

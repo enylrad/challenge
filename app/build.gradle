@@ -54,7 +54,7 @@ android {
 
             //SharedPreferences
             buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER\""
-            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+            buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
 
             resValue "string", "app_version", "${defaultConfig.versionName} (${defaultConfig.versionCode})"
@@ -69,7 +69,7 @@ android {
 
             //SharedPreferences
             buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_PRE\""
-            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+            buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
             resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
         }
@@ -82,7 +82,7 @@ android {
 
             //SharedPreferences
             buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_DEV\""
-            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+            buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
             resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
         }

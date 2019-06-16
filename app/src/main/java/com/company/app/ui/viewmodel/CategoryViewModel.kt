@@ -27,9 +27,7 @@ class CategoryViewModel @Inject constructor(
     fun getCategories() {
         apiService.getCategories().subscribeOn(Schedulers.io())
                 .flatMap { categories ->
-                    Observable.just(
-                            Resource.success(categories)
-                    )
+                    Observable.just(Resource.success(categories))
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -47,9 +45,7 @@ class CategoryViewModel @Inject constructor(
     fun getSubCategories(idCategory: String) {
         apiService.getSubCategories(idCategory).subscribeOn(Schedulers.io())
                 .flatMap { categories ->
-                    Observable.just(
-                            Resource.success(categories)
-                    )
+                    Observable.just(Resource.success(categories))
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -63,7 +59,6 @@ class CategoryViewModel @Inject constructor(
                         }
                 )
     }
-
 
     fun getCategoryListLiveData() = categoryListLiveData
 
