@@ -1,0 +1,156 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-android-extensions'
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileOptions {
+        sourceCompatibility versions.sourceCompat
+        targetCompatibility versions.targetCompat
+    }
+
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.habitissimo.challenge"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        prod {
+            resValue "string", "app_name", "Habitissimo Test"
+            dimension "default"
+
+            //SharedPreferences
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER\""
+            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+
+
+            resValue "string", "app_version", "${defaultConfig.versionName} (${defaultConfig.versionCode})"
+
+        }
+
+        pre {
+            resValue "string", "app_name", "Habitissimo Pre"
+            dimension "default"
+            applicationIdSuffix ".pre"
+            versionName = android.defaultConfig.versionName + "-pre"
+
+            //SharedPreferences
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_PRE\""
+            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+
+            resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
+        }
+
+        dev {
+            resValue "string", "app_name", "Habitissimo Dev"
+            dimension "default"
+            applicationIdSuffix ".dev"
+            versionName = android.defaultConfig.versionName + "-dev" + "-build" + getDate()
+
+            //SharedPreferences
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_DEV\""
+            buildConfigField "String", "API_URL", "\"http://api.habitissimo.es\""
+
+            resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+static def getDate() {
+    new Date().format('yyyyMMdd')
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+
+    //Android
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+
+    //DataBinding
+    kapt "com.android.databinding:compiler:3.1.4"
+
+    //LifeCycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
+
+
+    /* Retrofit using RxJava2, Okhttp, Okhttp logging interceptor, Gson  */
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
+
+    /* Dagger2 - We are going to use dagger.android which includes
+    * support for Activity and fragment injection so we need to include
+    * the following dependencies */
+    implementation 'com.google.dagger:dagger-android:2.23.1'
+    implementation 'com.google.dagger:dagger-android-support:2.23.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.23.1'
+
+    /* Dagger2 - default dependency */
+    kapt 'com.google.dagger:dagger-compiler:2.23.1'
+
+    /* RxAndroid  */
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
+    //Anko
+    implementation "org.jetbrains.anko:anko:${versions.anko}"
+    implementation "org.jetbrains.anko:anko-constraint-layout:${versions.anko}"
+
+    //Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+}

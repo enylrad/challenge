@@ -1,0 +1,19 @@
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkData": {
+      "type": "MAIN",
+      "splits": [],
+      "versionCode": 11,
+      "versionName": "1.0.0-dev-build20190606",
+      "enabled": true,
+      "outputFile": "app-dev-release.apk",
+      "fullName": "devRelease",
+      "baseName": "dev-release"
+    },
+    "path": "app-dev-release.apk",
+    "properties": {}
+  }
+]
