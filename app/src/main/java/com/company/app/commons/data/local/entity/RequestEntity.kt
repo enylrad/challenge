@@ -24,6 +24,6 @@ data class RequestEntity(
     @SerializedName("sub_category_id")
     var subCategoryId: String? = null,
 
-    @SerializedName("geo_lat")
-    var location: Int? = null
+    @SerializedName("location")
+    var location: LocationEntity? = null
 ) : Parcelable
