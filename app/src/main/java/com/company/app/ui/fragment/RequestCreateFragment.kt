@@ -49,13 +49,8 @@ class RequestCreateFragment : BaseFragment() {
         initViewModel()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_request_create, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_create, container, false)
         return binding.root
     }
 
@@ -65,8 +60,7 @@ class RequestCreateFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        categoryViewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(CategoryViewModel::class.java)
+        categoryViewModel = ViewModelProviders.of(this, viewModelFactory).get(CategoryViewModel::class.java)
         categoryViewModel.getCategoryListLiveData().observe(this, Observer { resource ->
             if (resource.data != null && resource.data.isNotEmpty()) {
                 binding.spCategory.setSpinnerCategories(resource.data)
@@ -81,8 +75,7 @@ class RequestCreateFragment : BaseFragment() {
                 mainActivity()?.showErrorDialog(resource.message!!)
             }
         })
-        locationViewModel =
-            ViewModelProviders.of(this, viewModelFactory).get(LocationViewModel::class.java)
+        locationViewModel = ViewModelProviders.of(this, viewModelFactory).get(LocationViewModel::class.java)
         locationViewModel.getLocationListLiveData().observe(this, Observer { resource ->
             if (resource.data != null && resource.data.isNotEmpty()) {
                 val adapter = SpinnerLocationAdapter(binding.etLocation.context, resource.data)
@@ -96,8 +89,7 @@ class RequestCreateFragment : BaseFragment() {
     }
 
     private fun initialiseView() {
-        binding.spCategory.setSpinnerItemSelectedListener(object :
-            SpinnerExtensions.ItemSelectedListener {
+        binding.spCategory.setSpinnerItemSelectedListener(object : SpinnerExtensions.ItemSelectedListener {
             override fun onItemSelected(item: Any) {
                 val category = item as? CategoryEntity
                 category?.let {
@@ -106,8 +98,7 @@ class RequestCreateFragment : BaseFragment() {
                 }
             }
         })
-        binding.spSubCategory.setSpinnerItemSelectedListener(object :
-            SpinnerExtensions.ItemSelectedListener {
+        binding.spSubCategory.setSpinnerItemSelectedListener(object : SpinnerExtensions.ItemSelectedListener {
             override fun onItemSelected(item: Any) {
                 val category = item as? CategoryEntity
                 category?.let {
@@ -126,12 +117,11 @@ class RequestCreateFragment : BaseFragment() {
         binding.parent.setOnClickListener {
             mainActivity()?.hideSoftKeyboard()
         }
-        binding.etLocation.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val location = parent.adapter.getItem(position) as LocationEntity
-                locationSelected = location
-                binding.etLocation.setText(location.name)
-            }
+        binding.etLocation.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val location = parent.adapter.getItem(position) as LocationEntity
+            locationSelected = location
+            binding.etLocation.setText(location.name)
+        }
         binding.btnRequestBudged.setOnClickListener {
             if (checkData()) {
                 //TODO

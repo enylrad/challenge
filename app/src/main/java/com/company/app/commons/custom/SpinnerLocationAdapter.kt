@@ -12,8 +12,7 @@ import com.company.app.commons.data.local.entity.LocationEntity
 import com.company.app.core.utils.stripAccents
 
 
-class SpinnerLocationAdapter(context: Context, values: List<LocationEntity>) :
-        ArrayAdapter<LocationEntity>(context, R.layout.adapter_spinner_custom, values) {
+class SpinnerLocationAdapter(context: Context, values: List<LocationEntity>) : ArrayAdapter<LocationEntity>(context, R.layout.adapter_spinner_custom, values) {
     private val items: List<LocationEntity> = values
     private val tempItems: List<LocationEntity> = values.toList()
     private val suggestions: MutableList<LocationEntity> = mutableListOf()

@@ -25,8 +25,7 @@ class RequestListFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_request_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_list, container, false)
         val adapter = RequestListAdapter()
         binding.adapter = adapter
         return binding.root

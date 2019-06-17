@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.company.app.R
 import com.company.app.commons.data.local.entity.CategoryEntity
 
-class SpinnerCategoryAdapter(context: Context, val values: List<CategoryEntity>) : ArrayAdapter<CategoryEntity>(context, R.layout.adapter_spinner_custom, R.id.adapter_name, values) {
+class SpinnerCategoryAdapter(context: Context, private val values: List<CategoryEntity>) : ArrayAdapter<CategoryEntity>(context, R.layout.adapter_spinner_custom, R.id.adapter_name, values) {
     override fun getCount(): Int = values.size
 
     override fun getItem(position: Int): CategoryEntity? = values[position]
