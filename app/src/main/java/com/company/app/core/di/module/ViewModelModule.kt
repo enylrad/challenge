@@ -6,6 +6,7 @@ import com.company.app.core.di.ViewModelKey
 import com.company.app.core.factory.ViewModelFactory
 import com.company.app.ui.viewmodel.CategoryViewModel
 import com.company.app.ui.viewmodel.LocationViewModel
+import com.company.app.ui.viewmodel.RequestViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -25,4 +26,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LocationViewModel::class)
     protected abstract fun locationViewModel(locationViewModel: LocationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RequestViewModel::class)
+    protected abstract fun requestViewModel(locationViewModel: RequestViewModel): ViewModel
 }

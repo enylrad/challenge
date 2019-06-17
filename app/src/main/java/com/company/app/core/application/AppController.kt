@@ -9,12 +9,6 @@ import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-/*
- * we use our AppComponent (now prefixed with Dagger)
- * to inject our Application class.
- * This way a DispatchingAndroidInjector is injected which is
- * then returned when an injector for an activity is requested.
- * */
 class AppController : Application(), HasActivityInjector {
 
     @Inject

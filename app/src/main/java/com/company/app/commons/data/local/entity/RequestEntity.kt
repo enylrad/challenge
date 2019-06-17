@@ -6,24 +6,27 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RequestEntity(
-    @SerializedName("id")
-    var id: String? = null,
+        @SerializedName("id")
+        var id: String? = null,
 
-    @SerializedName("name")
-    var name: String? = null,
+        @SerializedName("name")
+        var name: String? = null,
 
-    @SerializedName("email")
-    var email: String? = null,
+        @SerializedName("email")
+        var email: String? = null,
 
-    @SerializedName("description")
-    var description: String? = null,
+        @SerializedName("description")
+        var description: String? = null,
 
-    @SerializedName("phone")
-    var phone: String? = null,
+        @SerializedName("phone")
+        var phone: String? = null,
 
-    @SerializedName("sub_category_id")
-    var subCategoryId: String? = null,
+        @SerializedName("category_id")
+        var categoryId: String? = null,
 
-    @SerializedName("location")
-    var location: LocationEntity? = null
+        @SerializedName("sub_category_id")
+        var subCategoryId: String? = null,
+
+        @SerializedName("location")
+        var location: LocationEntity? = null
 ) : Parcelable

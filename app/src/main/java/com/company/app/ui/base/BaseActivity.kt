@@ -9,7 +9,6 @@ import dagger.android.support.HasSupportFragmentInjector
 
 abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-
     fun showErrorDialog(message: String, onConfirm: (() -> Unit)? = null) {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()

@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.company.app.R
 import com.company.app.commons.custom.SpinnerExtensions
 import com.company.app.commons.custom.SpinnerExtensions.setSpinnerCategories
@@ -16,6 +18,8 @@ import com.company.app.commons.custom.SpinnerExtensions.setSpinnerItemSelectedLi
 import com.company.app.commons.custom.SpinnerLocationAdapter
 import com.company.app.commons.data.local.entity.CategoryEntity
 import com.company.app.commons.data.local.entity.LocationEntity
+import com.company.app.commons.data.local.entity.RequestEntity
+import com.company.app.core.constants.Extras
 import com.company.app.core.utils.isValidEmail
 import com.company.app.databinding.FragmentRequestCreateBinding
 import com.company.app.ui.base.BaseFragment
@@ -62,25 +66,27 @@ class RequestCreateFragment : BaseFragment() {
     private fun initViewModel() {
         categoryViewModel = ViewModelProviders.of(this, viewModelFactory).get(CategoryViewModel::class.java)
         categoryViewModel.getCategoryListLiveData().observe(this, Observer { resource ->
-            if (resource.data != null && resource.data.isNotEmpty()) {
+            binding.progressCategory.visibility = View.GONE
+            if (resource.isSuccess) {
                 binding.spCategory.setSpinnerCategories(resource.data)
-            } else {
+            } else if (resource.isError) {
                 mainActivity()?.showErrorDialog(resource.message!!)
             }
         })
         categoryViewModel.getSubCategoryListLiveData().observe(this, Observer { resource ->
-            if (resource.data != null && resource.data.isNotEmpty()) {
+            binding.progressSubCategory.visibility = View.GONE
+            if (resource.isSuccess) {
                 binding.spSubCategory.setSpinnerCategories(resource.data)
-            } else {
+            } else if (resource.isError) {
                 mainActivity()?.showErrorDialog(resource.message!!)
             }
         })
         locationViewModel = ViewModelProviders.of(this, viewModelFactory).get(LocationViewModel::class.java)
         locationViewModel.getLocationListLiveData().observe(this, Observer { resource ->
-            if (resource.data != null && resource.data.isNotEmpty()) {
-                val adapter = SpinnerLocationAdapter(binding.etLocation.context, resource.data)
+            if (resource.isSuccess) {
+                val adapter = SpinnerLocationAdapter(binding.etLocation.context, resource.data!!)
                 binding.etLocation.setAdapter(adapter)
-            } else {
+            } else if (resource.isError) {
                 mainActivity()?.showErrorDialog(resource.message!!)
             }
         })
@@ -122,12 +128,26 @@ class RequestCreateFragment : BaseFragment() {
             locationSelected = location
             binding.etLocation.setText(location.name)
         }
+
         binding.btnRequestBudged.setOnClickListener {
             if (checkData()) {
-                //TODO
-                mainActivity()?.onBackPressed()
+                val request = createRequest()
+                val bundle = bundleOf(Extras.REQUEST_ADDED to request)
+                findNavController().navigate(R.id.action_requestCreateFragment_to_requestListFragment, bundle)
             }
         }
+    }
+
+    private fun createRequest(): RequestEntity {
+        return RequestEntity(
+                name = binding.etName.text.toString().trim(),
+                description = binding.etDescription.text.toString().trim(),
+                phone = binding.etPhone.text.toString().trim(),
+                email = binding.etMail.text.toString().trim(),
+                location = locationSelected,
+                categoryId = categorySelected?.id,
+                subCategoryId = subCategorySelected?.id
+        )
     }
 
     private fun checkData(): Boolean {
@@ -136,12 +156,18 @@ class RequestCreateFragment : BaseFragment() {
             binding.etName.error = getString(R.string.name_required)
             valid = false
         }
+
+        if (binding.etDescription.text.toString().isEmpty()) {
+            binding.etDescription.error = getString(R.string.description_required)
+            valid = false
+        }
+
         if (binding.etPhone.text.toString().isEmpty()) {
             binding.etPhone.error = getString(R.string.phone_required)
             valid = false
         } else {
             try {
-                binding.etPhone.text.toString().toInt()
+                binding.etPhone.text.toString().toLong()
             } catch (ex: NumberFormatException) {
                 binding.etPhone.error = getString(R.string.error_format)
                 valid = false

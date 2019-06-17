@@ -2,95 +2,128 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/parent"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/fragment_vertical_margin"
-        android:layout_marginTop="@dimen/fragment_horizontal_margin"
-        android:layout_marginEnd="@dimen/fragment_vertical_margin"
-        android:layout_marginBottom="@dimen/fragment_horizontal_margin"
-        tools:context=".ui.fragment.RequestListFragment">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/name"
-            android:inputType="text|textCapWords"
-            android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone"
-            android:inputType="number"
-            android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_name" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_mail"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_phone" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/fragment_vertical_margin"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_marginEnd="@dimen/fragment_vertical_margin"
+            android:layout_marginBottom="@dimen/fragment_horizontal_margin"
+            tools:context=".ui.fragment.RequestListFragment">
 
-        <AutoCompleteTextView
-            android:id="@+id/et_location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:completionThreshold="1"
-            android:ellipsize="end"
-            android:hint="@string/location"
-            android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_mail" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:inputType="text|textCapWords"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/sp_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_location"
-            tools:listitem="@layout/adapter_spinner_custom" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|start"
+                android:hint="@string/description"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLength="255"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_name" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/sp_sub_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sp_category"
-            tools:listitem="@layout/adapter_spinner_custom" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:inputType="number"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_description" />
 
-        <Button
-            android:id="@+id/btn_request_budged"
-            style="@style/BtnPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/request_budget"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_phone" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <AutoCompleteTextView
+                android:id="@+id/et_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:completionThreshold="1"
+                android:ellipsize="end"
+                android:hint="@string/location"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_mail" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_category"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_location"
+                tools:listitem="@layout/adapter_spinner_custom" />
+
+            <ProgressBar
+                android:id="@+id/progress_category"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintBottom_toTopOf="@+id/sp_category"
+                app:layout_constraintEnd_toEndOf="@+id/sp_category"
+                app:layout_constraintTop_toBottomOf="@+id/sp_category" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_sub_category"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sp_category"
+                tools:listitem="@layout/adapter_spinner_custom" />
+
+            <ProgressBar
+                android:id="@+id/progress_sub_category"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintBottom_toTopOf="@+id/sp_sub_category"
+                app:layout_constraintEnd_toEndOf="@+id/sp_sub_category"
+                app:layout_constraintTop_toBottomOf="@+id/sp_sub_category" />
+
+            <Button
+                android:id="@+id/btn_request_budged"
+                style="@style/BtnPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/request_budget"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sp_sub_category" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

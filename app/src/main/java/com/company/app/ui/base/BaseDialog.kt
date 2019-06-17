@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 
 open class BaseDialog : DialogFragment() {
 
-
     override fun onStart() {
         super.onStart()
         setDialogWindowWidth(DIALOG_WINDOW_WIDTH)

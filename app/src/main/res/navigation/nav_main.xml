@@ -18,7 +18,13 @@
         android:id="@+id/requestCreateFragment"
         android:name="com.company.app.ui.fragment.RequestCreateFragment"
         android:label="RequestCreateFragment"
-        tools:layout="@layout/fragment_request_create" />
+        tools:layout="@layout/fragment_request_create">
+        <action
+            android:id="@+id/action_requestCreateFragment_to_requestListFragment"
+            app:destination="@id/requestListFragment"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 
 </navigation>

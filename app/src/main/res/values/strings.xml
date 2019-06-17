@@ -12,4 +12,7 @@
     <string name="error_format">Debe ser un formato válido</string>
     <string name="location_required">Se debe seleccionar una localidad</string>
     <string name="mail_required">El correo electrónico es obligatorio</string>
+    <string name="empty_requests">No hay presupuestos</string>
+    <string name="description_required">La descripción es obligatoria</string>
+    <string name="description">Descripción</string>
 </resources>
