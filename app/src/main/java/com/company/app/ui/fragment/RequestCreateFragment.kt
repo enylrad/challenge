@@ -72,7 +72,9 @@ class RequestCreateFragment : BaseFragment() {
             if (resource.isSuccess) {
                 binding.spCategory.setSpinnerCategories(resource.data)
             } else if (resource.isError) {
-                mainActivity()?.showErrorDialog(resource.message!!)
+                mainActivity()?.showErrorDialog(resource.message!!) {
+                    mainActivity()?.onBackPressed()
+                }
             }
         })
         categoryViewModel.getSubCategoryListLiveData().observe(this, Observer { resource ->
@@ -80,7 +82,9 @@ class RequestCreateFragment : BaseFragment() {
             if (resource.isSuccess) {
                 binding.spSubCategory.setSpinnerCategories(resource.data)
             } else if (resource.isError) {
-                mainActivity()?.showErrorDialog(resource.message!!)
+                mainActivity()?.showErrorDialog(resource.message!!) {
+                    mainActivity()?.onBackPressed()
+                }
             }
         })
         locationViewModel = ViewModelProviders.of(this, viewModelFactory).get(LocationViewModel::class.java)
@@ -89,7 +93,9 @@ class RequestCreateFragment : BaseFragment() {
                 val adapter = SpinnerLocationAdapter(binding.etLocation.context, resource.data!!)
                 binding.etLocation.setAdapter(adapter)
             } else if (resource.isError) {
-                mainActivity()?.showErrorDialog(resource.message!!)
+                mainActivity()?.showErrorDialog(resource.message!!) {
+                    mainActivity()?.onBackPressed()
+                }
             }
         })
         requestViewModel = ViewModelProviders.of(this, viewModelFactory).get(RequestViewModel::class.java)
