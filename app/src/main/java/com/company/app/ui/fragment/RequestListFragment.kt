@@ -54,6 +54,10 @@ class RequestListFragment : BaseFragment() {
                 binding.tvEmpty.visibility = View.VISIBLE
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
         requestViewModel.getRequests()
     }
 
