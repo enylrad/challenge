@@ -52,7 +52,7 @@ android {
             dimension "default"
 
             //SharedPreferences
-            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER\""
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_DEMO_DEMO\""
             buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
 
@@ -67,7 +67,7 @@ android {
             versionName = android.defaultConfig.versionName + "-pre"
 
             //SharedPreferences
-            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_PRE\""
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_DEMO_PRE\""
             buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
             resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
@@ -80,7 +80,7 @@ android {
             versionName = android.defaultConfig.versionName + "-dev" + "-build" + getDate()
 
             //SharedPreferences
-            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_BLIVER_DEV\""
+            buildConfigField "String", "SHARED_PREFS_APP", "\"SHARED_PREFS_DEMO_DEV\""
             buildConfigField "String", "API_URL", "\"https://api.habitissimo.es\""
 
             resValue "string", "app_version", "$versionName (${defaultConfig.versionCode})"
@@ -119,6 +119,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
 
+    //Room
+    implementation "androidx.room:room-runtime:2.1.0"
+    implementation "androidx.room:room-rxjava2:2.1.0"
+    kapt "androidx.room:room-compiler:2.1.0"
 
     /* Retrofit using RxJava2, Okhttp, Okhttp logging interceptor, Gson  */
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -146,6 +150,9 @@ dependencies {
 
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //SecureSharedPreferences
+    implementation 'com.scottyab:secure-preferences-lib:0.1.7'
 
     //Test
     testImplementation 'junit:junit:4.12'

@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.company.app.R
-import com.company.app.commons.data.local.entity.RequestEntity
-import com.company.app.core.constants.Extras
 import com.company.app.databinding.FragmentRequestListBinding
 import com.company.app.ui.adapter.RequestListAdapter
 import com.company.app.ui.base.BaseFragment
@@ -56,9 +54,7 @@ class RequestListFragment : BaseFragment() {
                 binding.tvEmpty.visibility = View.VISIBLE
             }
         })
-        arguments?.getParcelable<RequestEntity>(Extras.REQUEST_ADDED)?.let {
-            requestViewModel.addRequest(it)
-        } ?: requestViewModel.getRequests()
+        requestViewModel.getRequests()
     }
 
 

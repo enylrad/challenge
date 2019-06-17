@@ -2,10 +2,7 @@ package com.company.app.core.di.component
 
 import android.app.Application
 import com.company.app.core.application.AppController
-import com.company.app.core.di.module.ActivityModule
-import com.company.app.core.di.module.FragmentModule
-import com.company.app.core.di.module.NetworkModule
-import com.company.app.core.di.module.ViewModelModule
+import com.company.app.core.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -15,6 +12,7 @@ import javax.inject.Singleton
         modules = [
             ViewModelModule::class,
             NetworkModule::class,
+            SessionPrefsModule::class,
             FragmentModule::class,
             ActivityModule::class,
             AndroidSupportInjectionModule::class]

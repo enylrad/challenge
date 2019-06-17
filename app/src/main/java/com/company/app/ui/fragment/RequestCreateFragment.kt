@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,12 +18,12 @@ import com.company.app.commons.custom.SpinnerLocationAdapter
 import com.company.app.commons.data.local.entity.CategoryEntity
 import com.company.app.commons.data.local.entity.LocationEntity
 import com.company.app.commons.data.local.entity.RequestEntity
-import com.company.app.core.constants.Extras
 import com.company.app.core.utils.isValidEmail
 import com.company.app.databinding.FragmentRequestCreateBinding
 import com.company.app.ui.base.BaseFragment
 import com.company.app.ui.viewmodel.CategoryViewModel
 import com.company.app.ui.viewmodel.LocationViewModel
+import com.company.app.ui.viewmodel.RequestViewModel
 import dagger.android.support.AndroidSupportInjection
 import timber.log.Timber
 import javax.inject.Inject
@@ -38,6 +37,8 @@ class RequestCreateFragment : BaseFragment() {
     lateinit var categoryViewModel: CategoryViewModel
 
     lateinit var locationViewModel: LocationViewModel
+
+    lateinit var requestViewModel: RequestViewModel
 
     private lateinit var binding: FragmentRequestCreateBinding
 
@@ -54,7 +55,8 @@ class RequestCreateFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_request_create, container, false)
+        binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_request_create, container, false)
         return binding.root
     }
 
@@ -86,6 +88,15 @@ class RequestCreateFragment : BaseFragment() {
             if (resource.isSuccess) {
                 val adapter = SpinnerLocationAdapter(binding.etLocation.context, resource.data!!)
                 binding.etLocation.setAdapter(adapter)
+            } else if (resource.isError) {
+                mainActivity()?.showErrorDialog(resource.message!!)
+            }
+        })
+        requestViewModel = ViewModelProviders.of(this, viewModelFactory).get(RequestViewModel::class.java)
+        requestViewModel.getRequestListLiveData().observe(this, Observer { resource ->
+            if (resource.isSuccess) {
+                mainActivity()?.hideSoftKeyboard()
+                findNavController().navigate(R.id.action_requestCreateFragment_to_requestListFragment)
             } else if (resource.isError) {
                 mainActivity()?.showErrorDialog(resource.message!!)
             }
@@ -131,9 +142,7 @@ class RequestCreateFragment : BaseFragment() {
 
         binding.btnRequestBudged.setOnClickListener {
             if (checkData()) {
-                val request = createRequest()
-                val bundle = bundleOf(Extras.REQUEST_ADDED to request)
-                findNavController().navigate(R.id.action_requestCreateFragment_to_requestListFragment, bundle)
+                requestViewModel.addRequest(createRequest())
             }
         }
     }

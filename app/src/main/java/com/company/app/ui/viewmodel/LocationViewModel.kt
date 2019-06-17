@@ -11,11 +11,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
-/*
- * We are injecting the MovieDao class
- * and the MovieApiService class to the ViewModel.
- * */
 class LocationViewModel @Inject constructor(
         private val apiService: ApiService
 ) : ViewModel() {

@@ -1,4 +1,4 @@
-package io.zinkers.bliver
+package com.company.app
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

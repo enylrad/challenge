@@ -1,4 +1,4 @@
-package io.zinkers.bliver
+package com.company.app
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("io.zinkers.bliver", appContext.packageName)
+        assertEquals("com.company.app", appContext.packageName)
     }
 }
