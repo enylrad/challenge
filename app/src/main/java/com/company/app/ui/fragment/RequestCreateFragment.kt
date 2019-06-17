@@ -121,6 +121,7 @@ class RequestCreateFragment : BaseFragment() {
                 }
             }
         })
+
         binding.spSubCategory.setSpinnerItemSelectedListener(object : SpinnerExtensions.ItemSelectedListener {
             override fun onItemSelected(item: Any) {
                 val category = item as? CategoryEntity
@@ -129,21 +130,29 @@ class RequestCreateFragment : BaseFragment() {
                 }
             }
         })
+
         binding.spCategory.setOnTouchListener { _, _ ->
             mainActivity()?.hideSoftKeyboard()
             false
         }
+
         binding.spSubCategory.setOnTouchListener { _, _ ->
             mainActivity()?.hideSoftKeyboard()
             false
         }
+
         binding.parent.setOnClickListener {
             mainActivity()?.hideSoftKeyboard()
         }
+
         binding.etLocation.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val location = parent.adapter.getItem(position) as LocationEntity
             locationSelected = location
             binding.etLocation.setText(location.name)
+        }
+
+        binding.btnBack.setOnClickListener {
+            mainActivity()?.onBackPressed()
         }
 
         binding.btnRequestBudged.setOnClickListener {

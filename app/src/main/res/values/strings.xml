@@ -15,4 +15,5 @@
     <string name="empty_requests">No hay presupuestos</string>
     <string name="description_required">La descripción es obligatoria</string>
     <string name="description">Descripción</string>
+    <string name="title_create_request">Crea una solicitud</string>
 </resources>
